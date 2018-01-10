@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Docuit - Editor</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/highlighter.style.css">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.highlight.js"></script>
+<script type="text/javascript" src="js/markdown-to-html.js"></script>
+<script type="text/javascript">
+
+</script>
+</head>
+<body>
+<div id="editor">
+<textarea id="htmleditor" placeholder="HTML" oninput="realtimeedit()">
+# BIG FOKING TITLE
+## 16x2, 20x4 etc... LCD Tutorial
+In this folder you can find the correct library and an example code for I2C LCD's, it works with many types of LCD's, like 16x2, 16x4, 20x4, 20x2 etc...
+
+Put the `LiquidCrystal_I2C` folder (you can find it in the `libraries`) to your `Documents/Arduino/libraries`!
+
+Now write the correct column and row number in the code!
+
+Example for 16x2:
+`LiquidCrystal_I2C lcd(0x3F,16,2);`
+
+Example for 20x4:
+`LiquidCrystal_I2C lcd(0x3F,20,4);`
+
+Now if you are done with this, you need to find out the LCD's address. It's very easy! First, connect your LCD to your Arduino, here's how:
+
+Arduino        | SDA           | SCL           |
+:------------- | ------------- | ------------- |
+UNO/Nano       | A4            | A5            |
+Mega           | Pin 20        | Pin 21        |
+And some code highlighting.
+```
+void setup() {
+      // initialize digital pin LED_BUILTIN as an output.
+      pinMode(LED_BUILTIN, OUTPUT);
+    }
+
+    // the loop function runs over and over again forever
+    void loop() {
+      digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
+      delay(1000);                       // wait for a second
+      digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
+      delay(1000);                       // wait for a second
+    }
+```
+</textarea>
+</div>
+
+<div id="resize">
+	<img class="resizecenter" src="img/dots.png">
+</div>
+
+<div id="htmlpreview">
+	<div id="content">
+
+  </div>
+</div>
+
+</textarea>
+
+<script>
+function realtimeedit() {
+  var editorcontent = document.getElementById('htmleditor').value;
+  var editorcontentfix = editorcontent.replace(/\$/g,"&#x24;");
+  markdownToHtml(editorcontentfix, document.getElementById('content'));
+  $(document).ready(function(){
+    $('pre.code').highlight({source:1, zebra:1, indent:'space', list:'ol'});
+  });
+};
+
+realtimeedit();
+
+</script>
+
+</body>
+</html>

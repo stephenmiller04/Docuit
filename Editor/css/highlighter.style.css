@@ -1,0 +1,180 @@
+@font-face {
+    font-family: bold_font;
+    src: url('fonts/bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: regular_font;
+    src: url('fonts/regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: code_font;
+    src: url('fonts/monofonto.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: number_font;
+    src: url('fonts/monaco.ttf') format('truetype');
+}
+/*SYNTAX HIGHLIGHT*/
+
+div.highlight {
+	background:#2c3139;
+	font-family:"Courier New",Courier,monospace;
+	overflow: hidden;
+	color: #abb2bf;
+  border: 1px solid #000;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background: rgba(0,0,0,0);
+}
+
+::-webkit-scrollbar-track {
+  background-color: #21252b;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.3);
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background: rgba(255,255,255,0.3);
+}
+
+div.highlight pre{
+	width: 100%;
+	overflow: auto;
+	padding:0;
+	margin:0;
+	font-size:13px;
+	clear: both;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* tabs */
+div.highlight ul.tabs {
+	overflow: hidden;
+	padding: 5px 0 5px 0;
+	margin: 0;
+	list-style: none;
+	border-bottom: 1px solid #E0E0E0;
+	width: 100%;
+	position: relative;
+}
+div.highlight ul.tabs li {
+	padding: 0;
+	margin: 0 5px;
+	float: left;
+	background: none;
+	border-bottom: 1px dashed #CCC;
+	line-height:1.0em;
+	color: #CCC;
+	cursor: pointer;
+}
+div.highlight ul.tabs li.active {
+	border-bottom: none;
+	cursor: default;
+}
+
+/* pre */
+div.highlight pre.code ol {
+	margin: 0;
+	padding:0 0 0 45px;
+
+}
+
+
+div.highlight pre.code ul {
+	margin: 0;
+	padding:0;
+}
+div.highlight pre.code ol li,
+div.highlight pre.code ul li {
+	padding:0 0 0 5px;
+	background:#282c34;
+}
+div.highlight pre.code ul li {
+	border-left:none;
+}
+div.highlight pre.code ol li.even,
+div.highlight pre.code ul li.even {
+	background-color:#282c34;
+}
+div.highlight pre.source {
+	display: none;
+	padding:0 0 0 5px;
+}
+
+/* highligting */
+pre.code .str {
+	color: #0d0;
+}
+pre.code .var {
+	color: #d00;
+}
+
+pre.code .kwd,
+pre.code .kwd span {
+	color: #c672bd;
+}
+pre.code .com,
+pre.code .com span {
+	color:#5c6370;
+	font-style: italic;
+	font-weight: normal;
+}
+pre.code .typ {
+	color: #606;
+}
+pre.code .lit {
+	color: #066;
+}
+pre.code .pun {
+	color: #660; }
+pre.code .pln {
+	color: #000;
+}
+pre.code .tag {
+	color: #5c6370;
+	font-weight: bold;
+}
+pre.code .atn {
+	color: #606;
+}
+pre.code .atv {
+	color: #080;
+}
+pre.code .dec {
+	color: #606;
+}
+pre.code .fnc,
+pre.code .fnc span {
+	color: #61afef;
+}
+
+/* css */
+.css pre.code .kwd,
+.css pre.code .kwd span {
+	color: #008;
+	font-weight: bold;
+}
+/* php */
+.php pre.code .str,
+.php pre.code .str span {
+	color: #0d0;
+}
+.php pre.code .var,
+.php pre.code .var span {
+	color: #b00;
+};
+.php pre.code .com,
+.php pre.code .com span {
+	color:#008;
+	font-style: italic;
+	font-weight: normal;
+}
