@@ -149,15 +149,26 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 300;
 }
 
-a {
+a:link {
+  color: #61afef;
   text-decoration: none;
-  color: #333;
-  border-bottom: 1px solid #FD6C6C;
+}
+
+a:visited {
+  color: #61afef;
+  text-decoration: none;
 }
 
 a:hover {
-  font-style: italic;
+  color: #61afef;
+  text-decoration: underline;
 }
+
+a:active {
+  color: #61afef;
+  text-decoration: underline;
+}
+
 button {
   top: 35px;
   right: 70px;

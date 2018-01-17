@@ -14,42 +14,29 @@
 </head>
 <body>
 <div id="editor">
-<textarea id="htmleditor" placeholder="HTML" oninput="realtimeedit()">
-# BIG FOKING TITLE
-## 16x2, 20x4 etc... LCD Tutorial
-In this folder you can find the correct library and an example code for I2C LCD's, it works with many types of LCD's, like 16x2, 16x4, 20x4, 20x2 etc...
+<textarea id="htmleditor" placeholder="" oninput="realtimeedit()">
+# BIG TITLE
+## Little title
+Some normal text.
 
-Put the `LiquidCrystal_I2C` folder (you can find it in the `libraries`) to your `Documents/Arduino/libraries`!
-
-Now write the correct column and row number in the code!
-
-Example for 16x2:
-`LiquidCrystal_I2C lcd(0x3F,16,2);`
-
-Example for 20x4:
-`LiquidCrystal_I2C lcd(0x3F,20,4);`
-
-Now if you are done with this, you need to find out the LCD's address. It's very easy! First, connect your LCD to your Arduino, here's how:
-
-Arduino        | SDA           | SCL           |
+Name           | City          | Age           |
 :------------- | ------------- | ------------- |
-UNO/Nano       | A4            | A5            |
-Mega           | Pin 20        | Pin 21        |
-And some code highlighting.
-```
-void setup() {
-      // initialize digital pin LED_BUILTIN as an output.
-      pinMode(LED_BUILTIN, OUTPUT);
-    }
+John Doe       | New York      | 41            |
+Stephen Miller | Budapest      | 20            |
 
-    // the loop function runs over and over again forever
-    void loop() {
-      digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
-      delay(1000);                       // wait for a second
-      digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
-      delay(1000);                       // wait for a second
-    }
+And some code highlighting.
+
 ```
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}
+```
+
+Inline `code highlight`.
+
+Also, you can drag'n'drop a text file here.
 </textarea>
 </div>
 
@@ -76,6 +63,29 @@ function realtimeedit() {
 };
 
 realtimeedit();
+
+function handleFileSelect(evt) {
+  evt.stopPropagation();
+  evt.preventDefault();
+
+  var files = evt.dataTransfer.files;
+  var reader = new FileReader();
+  reader.onload = function(event) {
+       document.getElementById('htmleditor').value = event.target.result;
+       realtimeedit();
+  }
+  reader.readAsText(files[0],"UTF-8");
+}
+
+function handleDragOver(evt) {
+  evt.stopPropagation();
+  evt.preventDefault();
+  evt.dataTransfer.dropEffect = 'copy';
+}
+
+var dropZone = document.getElementById('htmleditor');
+dropZone.addEventListener('dragover', handleDragOver, false);
+dropZone.addEventListener('drop', handleFileSelect, false);
 
 </script>
 

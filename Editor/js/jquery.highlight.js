@@ -1,20 +1,8 @@
-/*
- * jQuery Highlight Plugin
- * Examples and documentation at: http://demo.webcodingstudio.com/highlight/
- * Copyright (c) 2010 E. Matsakov
- * Version: 1.06 (01-Jun-2016)
- * Dual licensed under the MIT and GPL licenses:
- * http://www.opensource.org/licenses/mit-license.php
- * http://www.gnu.org/licenses/gpl.html
- * Requires: jQuery v1.2.6 or later
- */
 (function($){
 	$.fn.highlight = function(element_params){
 
 		var defaults = {
-			//ordered or unordered list
 			list: 'ol',
-			//name of the tag attribute to add a special language highlighting
 			attribute: 'lang'
 		}
 
@@ -32,9 +20,6 @@
 			var highlight_container = $(code_container).parent();
 
 			var source = code_container.html();
-			//source = source.replace(/</gm, '&lt;');
-
-			//replace tabs with spaces
 			if(params.indent=='space') {
 				source = source.replace(/\t/g,'    ');
 			}
@@ -62,9 +47,7 @@
 			}
 
 			code = code.replace(/(?:\r\n?|\n)$/, '');
-			// = '<'+params.list+' style="font-family: number_font;"><li style="font-family: code_font;">'+code.split(/\r\n|\n/).join('\n</li><li  style="font-family: code_font;">')+'\n</li></'+params.list+'>';
 
-			//replace instead of html, because of IE bug
 			$(code_container).replaceWith('<pre class="'+code_class+'">'+code+'</pre>');
 
 		});
@@ -72,17 +55,16 @@
 
 	$.highlightCode = {
 
-		//DEFAULT
+
 		hightlight_JS: function(code) {
 
-			var comments		= [];	// store comments
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects
+			var comments		= [];
 			var gObjects ='ArrayBuffer SharedArrayBuffer Atomics DataView JSON Iterator '+
 'ParallelArray StopIteration Promise Generator GeneratorFunction Map Set WeakMap WeakSet Array '+
 'RegExp Number Math Date String Object Function Boolean Symbol Error EvalError InternalError '+
 'RangeError ReferenceError SyntaxError TypeError URIError';
 			gObjects = new RegExp(get_keywords(gObjects), 'gi');
-// http://www.w3schools.com/js/js_reserved.asp
+
 			keywords = 'abstract arguments boolean break byte case catch char class const '+
 'continue debugger default delete do double else enum eval export extends false final finally '+
 'float for function goto if implements import in instanceof int interface let long native new '+
@@ -91,21 +73,21 @@
 			keywords = new RegExp(get_keywords(keywords), 'gi');
 
  	  		code = code
-				//replace keywords
+
 				.replace(keywords,'<span class="kwd">$1</span>$2')
 				.replace(gObjects,'<span class="kwd">$1</span>$2')
-				//replace keywords
+
 				.replace(/(\{|\}|\]|\[|\|)/gi,'<span class="kwd">$1</span>')
-				//replace strings
+
 				.replace(/('.*?')/g,'<span class="str">$1</span>')
-				//replace multiline comments
+
 				.replace(/\/\*([\s\S]*?)\*\//g, function(m, t)
 					{ return '\0C'+push(comments, multiline_comments(m))+'\0'; })
 				.replace(/\0C(\d+)\0/g, function(m, i)
 					{ return comments[i]; })
-				//replace one line comments
+
 				.replace(/\/\/(.*$)/gm,'<span class="com">//$1</span>')
-				//replace functons
+
 				.replace(/([a-z\_\$][a-z0-9_]*)\(/gi,'<span class="fnc">$1</span>(');
 
 			return code;
@@ -114,7 +96,7 @@
 
 		//BASH
 		hightlight_bash: function(code) {
-			var comments		= [];	// store comments
+			var comments		= [];
 			var funcs			='';
 			var keywords		='alias bg bind break builtin caller case cd'+
 ' command compgen complete compopt continue coproc declare dirs disown do done'+
@@ -127,25 +109,17 @@
 			keywords = new RegExp(get_keywords(keywords), 'gi');
 
 			code = code
-				//replace strings
+
 				.replace(/(".*?")/g,'<span class="str">$1</span>')
 				.replace(/('.*?')/g,'<span class="str">$1</span>');
-//				.replace(/\b([0-9.\-]+)\b/g,'<span class="str">$1</span>');
-				//replace multiline comments
-//				.replace(/\/\*([\s\S]*?)\*\//g, function(m, t)
-//					{ return '\0C'+push(comments, multiline_comments(m))+'\0'; })
-//				.replace(/\0C(\d+)\0/g, function(m, i)
-//					{ return comments[i]; })
-				//replace one line comments
+
 				code=code.replace(/#(.+)/g,'<span class="com"># $1</span>')
-				//replace variables
+
 				.replace(/\$(\w+)/gm,'<span class="var">$$$1</span>')
-				//replace functions
-//				.replace(funcs,'<span class="fnc">$1</span>$2')
-				//replace keywords
+
 				.replace(keywords,'<span class="kwd">$1</span>$2')
 				.replace(/^[$#]/gm,'<b>$</b>')
-// var is injected seperately here..
+
 				;
 			return code;
 		},
@@ -154,7 +128,7 @@
 		//PHP
 		hightlight_php: function(code) {
 
-			var comments		= [];	// store comments
+			var comments		= [];
 
 			var funcs			=
 'apache_child_terminate apache_get_modules apache_get_version apache_getenv apache_lookup_uri ' +
@@ -687,7 +661,6 @@
 'gzopen gzpassthru gzputs gzread gzrewind gzseek gztell gzuncompress gzwrite readgzfile ' +
 'zlib_get_coding_type echo print list switch die';
 
-// var is not allowed as a keyword, as its a cSS classname :-)
 
 			var keywords =	'and or xor array as break case ' +
 				'cfunction const continue declare default die do else ' +
@@ -702,27 +675,27 @@
 			keywords = new RegExp(get_keywords(keywords), 'gi');
 
 			code = code
-				//replace strings
+
 				.replace(/(".*?")/g,'<span class="str">$1</span>')
 				.replace(/('.*?')/g,'<span class="str">$1</span>')
 				.replace(/\b([0-9.\-]+)\b/g,'<span class="str">$1</span>')
-				// float notation numbers
+
 				.replace(/\b(-?[0-9.]+[eE]-?[0-9.])\b/g,'<span class="str">$1</span>')
-				//replace multiline comments
+
 				.replace(/\/\*([\s\S]*?)\*\//g, function(m, t)
 					{ return '\0C'+push(comments, multiline_comments(m))+'\0'; })
 				.replace(/\0C(\d+)\0/g, function(m, i)
 					{ return comments[i]; })
-				//replace one line comments
+
 				.replace(/\/\/(.*$)/gm,'<span class="com">//$1</span>')
 				.replace(/#(.+$)/gm,'<span class="com">#$1</span>')
-				//replace variables
+
 				.replace(/\$(\w+)/g,'<span class="var">$$$1</span>')
-				//replace functions
+
 				.replace(funcs,'<span class="fnc">$1</span>$2')
-				//replace keywords
+
 				.replace(keywords,'<span class="kwd">$1</span>$2')
-// var is injected seperately here..
+
 				.replace(/\\bvar\\b([^"])/g,'<span class="kwd">var</span>$1')
 				.replace(/\\bclass\\b([^=])/g,'<span class="kwd">class</span>$1');
 			return code;
@@ -731,7 +704,7 @@
 		//CSS
 		hightlight_css: function(code) {
 
-			var comments		= [];	// store comments
+			var comments		= [];
 
 			var keywords =	'background-color background-image background-position ' +
 				'background-repeat background border-collapse border-color border-spacing border-style border-top ' +
@@ -765,20 +738,20 @@
 			fonts = new RegExp(get_keywords(fonts), 'gi');
 
 			code = code
-				//replace comments
+
 				.replace(/\/\*([\s\S]*?)\*\//g, function(m, t)
 					{ return '\0C'+push(comments, multiline_comments(m))+'\0'; })
 				.replace(/\0C(\d+)\0/g, function(m, i)
 					{ return comments[i]; })
-				//replace keywords
+
 				.replace(keywords,'<span class="kwd">$1</span>$2')
-				//replace values
+
 				.replace(values,'<span class="pln">$1</span>$2')
-				//replace fonts
+
 				.replace(fonts,'<span class="str">$1</span>$2')
-				//replace hex colors
+
 				.replace(/(\#[a-fA-F0-9]{3,6})/gi,'<span class="lit">$1</span>')
-				//replace sizes
+
 				.replace(/(-?\d+)(\.\d+)?(px|em|pt|\:|\%|)/gi,'<span class="lit">$1$3</span>');
 			return code;
 		},
@@ -787,15 +760,15 @@
 		hightlight_html: function(code) {
 
 			code = code
-				//replace attributes
+
 				.replace(/\s+([a-zA-Z\-]{0,15})\=\"([-a-z0-9_ \/\.\#\:\=\;]{0,49})\"/gi,' <span class="atn">$1</span>=<span class="atv">"$2"</span>')
-				//replace open tags
+
 				.replace(/(&lt;)(\w{0,15})(\s+|&gt;|>)/gi,'$1<span class="tag">$2</span>$3')
-				//replace close tags
+
 				.replace(/(&lt;)\/(\w{0,15})(&gt;|>)/gi,'$1/<span class="tag">$2</span>$3')
-				//replace doctype
+
 				.replace(/(&lt;!)([-a-z0-9_ \/\.\#\:\"]{0,150})(&gt;|>)/gi,'<span class="dec">$1$2$3</span>')
-				//replace comments
+
 				.replace(/(&lt;|<)!--([\s\S]*?)--(&gt;|>)/gm,'<span class="com">$1!--$2--$3</span>');
 
 			return code;
@@ -803,7 +776,7 @@
 
 		//SQL
 		hightlight_sql: function(code) {
-			var comments		= [];	// store comments
+			var comments		= [];
 
 			var funcs	=	'abs avg case cast coalesce convert count current_timestamp ' +
 						'current_user day isnull left lower month nullif replace right ' +
@@ -834,39 +807,33 @@
 			op = new RegExp(get_keywords(op), 'gi');
 
 			code = code
-				//replace strings
+
 				.replace(/(".*?")/g,'<span class="str">$1</span>')
 				.replace(/('.*?')/g,'<span class="str">$1</span>')
-				//replace multiline comments
+
 				.replace(/\/\*([\s\S]*?)\*\//g, function(m, t)
 					{ return '\0C'+push(comments, multiline_comments(m))+'\0'; })
 				.replace(/\0C(\d+)\0/g, function(m, i)
 					{ return comments[i]; })
-				//replace one line comments
+
 				.replace(/\/\/(.*$)/gm,'<span class="com">//$1</span>')
-				//replace variables
+
 				.replace(/\$(\w+)/g,'<span class="var">$$$1</span>')
-				//replace functions
+
 				.replace(funcs,'<span class="fnc">$1</span>$2')
-				//replace keywords
+
 				.replace(keywords,'<span class="kwd">$1</span>$2')
-				//replace operators
+
 				.replace(op,'<span class="op">$1</span>$2');
 			return code;
 		}
 	};
 
-	/*
-	* helpers
-	*/
-
-	//prepare regexp template for keywords
 	function get_keywords(str)
 	{
 		return '(\\b' + str.replace(/ /g, '\\b|\\b') + '\\b)([^a-z0-9\$_])';
 	}
 
-	//process multiline comments
 	function multiline_comments(text)
 	{
 		text	= text.split('\n');
@@ -876,7 +843,6 @@
 		return text.join('\n');
 	}
 
-	//add element, return index
 	function push(array, element)
 	{
 		array.push(element);
