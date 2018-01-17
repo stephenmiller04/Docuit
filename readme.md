@@ -5,7 +5,7 @@ Clone the repository and try the app:
 
 ```
 git clone https://github.com/stephenmiller04/Docuit
-cd Docuit
+cd Docuit/Editor
 npm install
 npm start
 ```

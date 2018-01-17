@@ -72,12 +72,9 @@ app.on('ready', function () {
           label: 'Docuit',
           submenu: [
               {
-                  role: 'open'
-              },
-              {
                   label: 'About',
                   click: () => {
-                      aboutWindow = new BrowserWindow({width: 360, height: 270, frame: false});
+                      aboutWindow = new BrowserWindow({width: 360, height: 300, frame: false});
                       aboutWindow.setResizable(false);
                       aboutWindow.loadURL(url.format({
                         pathname: path.join(__dirname, 'about.html'),
