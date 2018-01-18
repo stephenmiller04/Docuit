@@ -14,7 +14,7 @@
 </head>
 <body>
 <div id="toolbar">
-  <img id="toolbar_new" class="tbicon tbnew" src="img/file.svg">
+  <img id="toolbar_new" class="tbicon tbnew" onclick="newfile()" src="img/file.svg">
   <img id="toolbar_load" class="tbicon" onclick="loadbutton()" src="img/folder.svg">
   <img id="toolbar_save" class="tbicon" onclick="hallo()" src="img/save.svg">
 
@@ -107,6 +107,19 @@ ipcRenderer.on('fileData', (event, data) => {
   document.getElementById('htmleditor').value = data;
   realtimeedit();
 })
+function newfile(){
+  dialog.showMessageBox({
+      type: 'info',
+      buttons: ['Yes', 'No'],
+      message: 'Make a new document?\nMake sure you already saved your work!',
+  }, resp => {
+      if (resp === 0) {
+          document.getElementById('htmleditor').value = "";
+          realtimeedit();
+      }
+  });
+}
+
 
 var app = require('electron').remote;
 var dialog = app.dialog;
