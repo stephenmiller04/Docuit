@@ -1,6 +1,6 @@
 {
   "name": "Docuit",
-  "version": "0.5.3",
+  "version": "0.7.3",
   "description": "A simple, open source Markdown editor.",
   "main": "main.js",
   "scripts": {
