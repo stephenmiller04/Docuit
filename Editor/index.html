@@ -17,7 +17,7 @@
   <img id="toolbar_new" class="tbicon tbnew" onclick="newfile()" src="img/file.svg">
   <img id="toolbar_load" class="tbicon" onclick="loadbutton()" src="img/folder.svg">
   <img id="toolbar_save" class="tbicon" onclick="hallo()" src="img/save.svg">
-
+  <div id="version">v0.7.3</div>
 </div>
 <div id="editor">
 <textarea id="htmleditor" placeholder="" oninput="realtimeedit()">
@@ -59,8 +59,6 @@ Also, you can drag'n'drop a text file here.
 </textarea>
 
 <script>
-
-
 function realtimeedit() {
   var editorcontent = document.getElementById('htmleditor').value;
   var editorcontentfix = editorcontent.replace(/\$/g,"&#x24;");
@@ -140,7 +138,6 @@ document.getElementById('toolbar_save').onclick = () => {
     })
   });
 };
-
 </script>
 </body>
 </html>
