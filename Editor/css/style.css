@@ -60,7 +60,35 @@ body {
   height: 100%;
   width: 35%;
   display: inline-block;
-  float:left;
+  float: left;
+}
+
+#toolbar {
+  height: 100%;
+  width: 40px;
+  display: inline-block;
+  float: left;
+  background-color: black;
+}
+
+.tbicon {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  margin-left: 2px;
+  -webkit-transition: margin-left 0.2s; /* Safari */
+    transition: margin-left 0.2s;
+}
+
+.tbicon:hover {
+  margin-left: 5px;
+  cursor:pointer;
+  -webkit-transition: margin-left 0.2s; /* Safari */
+    transition: margin-left 0.2s;
+}
+
+.tbnew {
+  margin-top: 5px;
 }
 
 #resize {
