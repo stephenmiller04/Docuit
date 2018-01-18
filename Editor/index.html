@@ -15,7 +15,7 @@
 <body>
 <div id="toolbar">
   <img id="toolbar_new" class="tbicon tbnew" src="img/file.svg">
-  <img id="toolbar_load" class="tbicon" src="img/folder.svg">
+  <img id="toolbar_load" class="tbicon" onclick="loadbutton()" src="img/folder.svg">
   <img id="toolbar_save" class="tbicon" src="img/save.svg">
 </div>
 <div id="editor">
@@ -91,6 +91,19 @@ function handleDragOver(evt) {
 var dropZone = document.getElementById('htmleditor');
 dropZone.addEventListener('dragover', handleDragOver, false);
 dropZone.addEventListener('drop', handleFileSelect, false);
+
+const {ipcRenderer} = require('electron')
+
+function loadbutton() {
+  ipcRenderer.send('openFile', () => {
+    console.log("Event sent.");
+  })
+}
+
+ipcRenderer.on('fileData', (event, data) => {
+  document.getElementById('htmleditor').value = data;
+  realtimeedit();
+})
 
 </script>
 
