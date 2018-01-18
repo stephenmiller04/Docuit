@@ -16,7 +16,8 @@
 <div id="toolbar">
   <img id="toolbar_new" class="tbicon tbnew" src="img/file.svg">
   <img id="toolbar_load" class="tbicon" onclick="loadbutton()" src="img/folder.svg">
-  <img id="toolbar_save" class="tbicon" src="img/save.svg">
+  <img id="toolbar_save" class="tbicon" onclick="hallo()" src="img/save.svg">
+
 </div>
 <div id="editor">
 <textarea id="htmleditor" placeholder="" oninput="realtimeedit()">
@@ -58,6 +59,8 @@ Also, you can drag'n'drop a text file here.
 </textarea>
 
 <script>
+
+
 function realtimeedit() {
   var editorcontent = document.getElementById('htmleditor').value;
   var editorcontentfix = editorcontent.replace(/\$/g,"&#x24;");
@@ -105,7 +108,26 @@ ipcRenderer.on('fileData', (event, data) => {
   realtimeedit();
 })
 
-</script>
+var app = require('electron').remote;
+var dialog = app.dialog;
+var fs = require('fs');
 
+document.getElementById('toolbar_save').onclick = () => {
+  dialog.showSaveDialog((fileName) => {
+    if(fileName === undefined){
+      alert("You didn't save the file");
+      return;
+    }
+
+    var content = document.getElementById('htmleditor').value;
+
+    fs.writeFile(fileName, content, (err) => {
+      if (err) console.log(err);
+      alert("Document saved successfully!");
+    })
+  });
+};
+
+</script>
 </body>
 </html>
