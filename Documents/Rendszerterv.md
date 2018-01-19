@@ -1,0 +1,4 @@
+# Rendszerterv
+Mivel a megrendelő a programot egy több platformon használható alkalmazásnak szeretné, így a projekt az ElectronJS segítségével fog megvalósulni. Az ElectronJS lehetővé teszi asztali alkalmazások létrehozását MacOS, Linux és Windows platformokon, Node.JS, HTML/CSS/JavaScript kód használatával, és mivel mind a három platformon azonos a kód, így a hiba lehetőségét a minimumra lehet szűrni, mivel csak egy kódra kell koncentrálni. Ezen kívül mivel a kód működése JavaScriptből áll fel, külön extraként készül egy webböngészőből elérhető verzió is.
+
+A program a jelenlegi modern kód szerkesztő design elveit követve, sötét témájú szín használatot, és modern flat design-t kap. Mivel CSS adja a design összerakását, így a felhasználónak lehetősége van módosítani, vagy az előre kiválasztható sémák közül tetszése szerint választani.
