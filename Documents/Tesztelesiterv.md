@@ -11,7 +11,18 @@ A program következő, lényegében már fő funkcióival rendelkező verziójá
 
 Ezen funkciók több fajta szöveges dokumentumokkal lettek tesztelve, szerkesztett szövegek elmentése is teszteken esett át, a program az elvártaknak megfelelően működik, így ezen verziót is továbbítottam a megrendelőnek kipróbálás céljából.
 
-## Tesztelési jegyzőkönyv:
+## Tesztelési jegyzőkönyv a v0.5.3 verzióhoz:
+
+Funkció                                       | Teszten átment?
+----------------------------------------------|-----------------
+Program futtatása Mac, Linux, Windows, Web-en | Igen
+Új dokumentum készítése                       | Igen
+Felugró ablak új dokumentum készítéskor       | Igen
+TXT és MD formátumok betöltése                | Igen
+Mentés TXT vagy MS formátumba                 | Igen
+Drag'n'Drop TXT és MD betöltése               | Igen
+Webes verzió alapvető működése                | Igen [Fejlesztés alatt]
+Szines kód szintaxis kiemelő                  | Igen
 
 ### Az elfogadható működőképesség ismérvei:
 

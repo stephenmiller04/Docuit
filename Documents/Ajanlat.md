@@ -6,8 +6,18 @@ Molnár István vagyok, Program tervező informatikus. Főként frontend és gra
 ### Funkcionális specifikáció:
 A program egy MarkDown dokumentum, és nyers TXT szerkesztő. A cél az, hogy a három leginkább használt, azaz MacOS, Linux és Windows platformokon használható dokumentum szerkesztő programot hozzunk létre. A Program működése azonos mind a három platformon, köszönhető az ElectronJS-nek. A program ezen kívül elérhető webböngészős formájában is, így akár tablet vagy mobil eszközről is használható.
 
-### Főbbfunkciói:
+### Főbb funkciói:
 A program főként a MarkDown dokumentumok szerkesztésére lett tervezve, a felépítéséből is adódóan (Két része választott nézet, szerkesztő és megjelenítő). Az alap MarkDown funkciókon kívül rendelkezik olyan extrával is mint például a szines kód szintaxis kiemeléssel, és szerkeszthető kinézettel, így a felhasználó igényei szerint testre szabhatja a betűtipust, és a szerkesztő program színhasználatait.
+
+### Részletes funkciói:
+- A program használható legyen MacOS, Linux és Windows platformokon
+- Extraként: Webes verzió
+- A program képes legyen: Új dokumentumot nyitni, betölteni és menteni
+- Szines kód szintaxis kiemelő funkció
+- Nyílt forráskód közzététele Githubon
+- A program 2 nézetbe legyen bontva
+- Baloldalt a szerkesztő
+- Jobb oldalt a MarkDown megjelenítő
 
 ## Árajánlat:
 Fejlesztő: Molnár István.
