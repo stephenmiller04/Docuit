@@ -13,6 +13,9 @@ A Random IT Kft. felvázolta igényeit, melyet egyeztetett a fejlesztővel.
 - Multiplatform alkalmazás [MacOS, Linux, Windows, Web]
 - Nyílt forrás kód közzététele
 - Szines kód szintaxis kiemelő
+- Félig elkészült, alap funkciók bemutatására alkalmas program bemutatása amint elkészül
+- 1.0-ás kész verzió minnél hamarabbi át adása
+- Maximum 60 napos fejlesztési idő
 
 ### Részletes program funkciók a megbeszéltek alapján:
 - Program két részre bontott nézettel rendelkezzen:
