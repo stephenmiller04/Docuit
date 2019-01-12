@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Docuit - Editor [ALPHA VERSION]</title>
+<title>Docuit - Editor</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/highlighter.style.css">
@@ -14,13 +14,14 @@
 </head>
 <body>
 <div id="toolbar">
-  <img id="toolbar_new" class="tbicon tbnew" onclick="newfile()" src="img/file.svg">
-  <img id="toolbar_load" class="tbicon" onclick="loadbutton()" src="img/folder.svg">
-  <img id="toolbar_save" class="tbicon" onclick="hallo()" src="img/save.svg">
+  <img id="toolbar_new" class="tbicon tbnew" onclick="newDoc()" src="img/file.svg">
+  <img id="toolbar_load" class="tbicon" onclick="document.getElementById('file-input').click();" src="img/folder.svg">
+  <img id="toolbar_save" class="tbicon" onclick="" src="img/save.svg">
   <div id="version">v0.7.3</div>
+  <input id="file-input" type="file" accept="text/plain" style="display:none" onchange="openFile(event)">
 </div>
 <div id="editor">
-<textarea id="htmleditor" placeholder="" oninput="realtimeedit()">
+<textarea id="htmleditor" placeholder="" oninput="preview()">
 # BIG TITLE
 ## Little title
 Some normal text.
@@ -59,7 +60,7 @@ Also, you can drag'n'drop a text file here.
 </textarea>
 
 <script>
-function realtimeedit() {
+function preview() {
   var editorcontent = document.getElementById('htmleditor').value;
   var editorcontentfix = editorcontent.replace(/\$/g,"&#x24;");
   markdownToHtml(editorcontentfix, document.getElementById('content'));
@@ -68,7 +69,7 @@ function realtimeedit() {
   });
 };
 
-realtimeedit();
+preview();
 
 function handleFileSelect(evt) {
   evt.stopPropagation();
@@ -78,7 +79,7 @@ function handleFileSelect(evt) {
   var reader = new FileReader();
   reader.onload = function(event) {
        document.getElementById('htmleditor').value = event.target.result;
-       realtimeedit();
+       preview();
   }
   reader.readAsText(files[0],"UTF-8");
 }
@@ -93,50 +94,27 @@ var dropZone = document.getElementById('htmleditor');
 dropZone.addEventListener('dragover', handleDragOver, false);
 dropZone.addEventListener('drop', handleFileSelect, false);
 
-const {ipcRenderer} = require('electron')
-
-function loadbutton() {
-  ipcRenderer.send('openFile', () => {
-    console.log("Event sent.");
-  })
+//creating new document
+function newDoc() {
+  var buttonvalue = confirm("Start a new document? Changes going to lost!");
+  if (buttonvalue == true) {
+    document.getElementById('htmleditor').value = "";
+    preview();
+  }
 }
 
-ipcRenderer.on('fileData', (event, data) => {
-  document.getElementById('htmleditor').value = data;
-  realtimeedit();
-})
-function newfile(){
-  dialog.showMessageBox({
-      type: 'info',
-      buttons: ['Yes', 'No'],
-      message: 'Make a new document?\nMake sure you already saved your work!',
-  }, resp => {
-      if (resp === 0) {
-          document.getElementById('htmleditor').value = "";
-          realtimeedit();
-      }
-  });
-}
+//load a file
+var openFile = function(event) {
 
-
-var app = require('electron').remote;
-var dialog = app.dialog;
-var fs = require('fs');
-
-document.getElementById('toolbar_save').onclick = () => {
-  dialog.showSaveDialog((fileName) => {
-    if(fileName === undefined){
-      alert("You didn't save the file");
-      return;
-    }
-
-    var content = document.getElementById('htmleditor').value;
-
-    fs.writeFile(fileName, content, (err) => {
-      if (err) console.log(err);
-      alert("Document saved successfully!");
-    })
-  });
+  var input = event.target;
+  var reader = new FileReader();
+  reader.onload = function(){
+    var text = reader.result;
+    var node = document.getElementById('htmleditor');
+    node.innerText = text;
+    preview();
+  };
+  reader.readAsText(input.files[0]);
 };
 </script>
 </body>
