@@ -96,7 +96,7 @@ dropZone.addEventListener('drop', handleFileSelect, false);
 
 //creating new document
 function newDoc() {
-  var buttonvalue = confirm("Start a new document? Changes going to lost!");
+  var buttonvalue = confirm("Do you want to make a new file?");
   if (buttonvalue == true) {
     document.getElementById('htmleditor').value = "";
     preview();
